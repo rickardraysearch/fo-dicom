@@ -1,9 +1,36 @@
 #### v.4.0.2 (TBD)
+* Bug fix: prevent resource leak when DesktopNetworkListener waits for new TCP clients
 * Updated to DICOM Dictionary 2019a (#724)
+* Add pure managed JpegLosses Decoder to DICOM.NetCore project
 * Upgraded native libraries to MSVC platform toolset v141 (VS 2017) (#814)
 * Replaced deprecated licenseUrl tags in NuGet specification files (#813)
 * Add validation of content when adding DICOM elements to DicomDataset. This validation is skipped when reading files or receiving data via network.
+* Be more prudent when releasing association after the linger timeout (#840)
+* A completely new DicomClient, under the namespace Dicom.Network.Client.DicomClient (beware of confusion with Dicom.Network.DicomClient!)
+  * The intent is that the old Dicom.Network.DicomClient will disappear in the next major update, so the namespace confusion shouldn't last very long.
+  * For now, both versions can be used side by side according to your needs. All of our unit tests cover both implementations. 
+  * The new Dicom.Network.Client.DicomClient sports the following characteristics:
+    * Redesigned architecture using state pattern. This makes the DicomClient a lot more robust in various scenarios (abort while sending requests, disconnect while releasing association, etc)
+    * Completely async from the very start
+    * Full and graceful cancellation support using CancellationToken. Upon cancellation, no more requests will be sent, the association will be released and the connection closed gracefully.
+    * One DicomClient instance per DICOM server. The host, port and other server related parameters are moved to the DicomClient constructor.
+    * More hooks to react to the various states a DicomClient goes through. (e.g. when connecting, when lingering the association, etc.)
+* Bug Fix: Fixed wrong interpretation and application of LUT for PALETTE COLOR images (#817)
 * Bug Fix: Allow any SOP Class to be set as Affected SOP CLass in C-FIND requests (#808)
+* Bug Fix: Don't drop connection right after releasing an association (#839)
+* Bug Fix: Wait for release of previous association before opening a new one  (#833)
+* Bug Fix: When a connection is still open but the association is already released, create a new association (#833)
+* Bug Fix: When adding datasets to a DicomDirectory where some patientNames have trailing ^, then they were not recognized as one patient (#765)
+* Bug Fix: Anonymizer throws exception on private tags (#771)
+* Bug Fix: Linear windowing wrong in corner cases (#816)
+* Bug Fix: Fix DicomClient getting stuck when sending one request fails completely (#848)
+* Added Modality LUT Sequence and VOI LUT Sequence functionality when generating a DICOM Image.
+* Bug Fix: Logging requests with very long private tags throws exception (#846)
+* Bug Fix: turn off validation when creating CFind-, CGet- or CMove-Requests, since there are no newly generated data included, but already existing UIDs have to be added there. (#860, #842)
+* Bug Fix: generation of DicomUID using obsolete method Generate("name") resulted in invalid UIDs. (#862)
+* Bug Fix: Disabling dataset validation for file meta information objects. (#859)
+* Bug Fix: JPEG 2000 decodes wrong colors in .NET Core (#850)
+* Enable secure DICOM Tls 1.0, 1.1 and 1.2 (#872)
 
 #### v.4.0.1 (3/13/2019)
 * change IFileReference and IByteBuffer to have offset of type long so that big files can be processed (#743)

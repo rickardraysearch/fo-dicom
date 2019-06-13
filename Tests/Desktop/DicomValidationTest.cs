@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2012-2018 fo-dicom contributors.
+﻿// Copyright (c) 2012-2019 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
 
 using System.IO;
@@ -76,6 +76,30 @@ namespace Dicom
             Assert.Throws<DicomValidationException>(() => ds.AddOrUpdate(DicomTag.ReferencedFileID, "HUGO-1"));
             Assert.Throws<DicomValidationException>(() => ds.AddOrUpdate(DicomTag.ReferencedFileID, "HUGOHUGOHUGOHUGO1"));
         }
+
+
+        [Fact]
+        public void AddInvalidUIDMultiplicity()
+        {
+            Assert.Throws<DicomValidationException>(() =>
+            {
+                var ds = new DicomDataset();
+                ds.Add(DicomTag.SeriesInstanceUID, "1.2.3\\3.4.5");
+            });
+
+            Assert.Throws<DicomValidationException>(() =>
+            {
+                var ds = new DicomDataset();
+                ds.Add(DicomTag.SeriesInstanceUID, "1.2.3", "2.3.4");
+            });
+
+            Assert.Throws<DicomValidationException>(() =>
+            {
+                var ds = new DicomDataset();
+                ds.Add(new DicomUniqueIdentifier(DicomTag.SeriesInstanceUID, "1.2.3", "3.4.5"));
+            });
+        }
+
 
         #endregion
 
