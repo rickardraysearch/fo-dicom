@@ -58,6 +58,8 @@ namespace Dicom.Network.Client
         /// </summary>
         DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
 
+        DicomClientNGetRequestHandler OnNGetRequest { get; set; }
+
         /// <summary>
         /// Representation of the DICOM association accepted event.
         /// </summary>
@@ -131,6 +133,7 @@ namespace Dicom.Network.Client
         public List<DicomPresentationContext> AdditionalPresentationContexts { get; set; }
         public Encoding FallbackEncoding { get; set; }
         public DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
+        public DicomClientNGetRequestHandler OnNGetRequest { get; set; }
 
         public event EventHandler<EventArguments.AssociationAcceptedEventArgs> AssociationAccepted;
         public event EventHandler<EventArguments.AssociationRejectedEventArgs> AssociationRejected;
@@ -240,6 +243,15 @@ namespace Dicom.Network.Client
 
             return await OnCStoreRequest(request).ConfigureAwait(false);
         }
+
+        internal async Task<DicomResponse> OnNGetRequestAsync(DicomNGetRequest request)
+        {
+            if (OnNGetRequest == null)
+                return new DicomNGetResponse(request, DicomStatus.AttributeListError);
+
+            return await OnNGetRequest(request).ConfigureAwait(false);
+        }
+
 
         public void NegotiateAsyncOps(int invoked = 0, int performed = 0)
         {

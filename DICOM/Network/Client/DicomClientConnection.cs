@@ -113,6 +113,14 @@ namespace Dicom.Network.Client
         /// The <see cref="DicomCStoreResponse"/> related to the C-STORE <paramref name="request"/>.
         /// </returns>
         Task<DicomResponse> OnCStoreRequestAsync(DicomCStoreRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DicomResponse> OnNGetRequest(DicomNGetRequest request);
+
     }
 
     public class DicomClientConnection : DicomService, IDicomClientConnection
@@ -200,6 +208,11 @@ namespace Dicom.Network.Client
         public Task<DicomResponse> OnCStoreRequestAsync(DicomCStoreRequest request)
         {
             return DicomClient.OnCStoreRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnNGetRequest(DicomNGetRequest request)
+        {
+            return DicomClient.OnNGetRequestAsync(request);
         }
     }
 }

@@ -11,4 +11,12 @@ namespace Dicom.Network.Client
     /// <param name="request">C-STORE request subject to handling.</param>
     /// <returns>Response from handling the C-STORE <paramref name="request"/>.</returns>
     public delegate Task<DicomCStoreResponse> DicomClientCStoreRequestHandler(DicomCStoreRequest request);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public delegate Task<DicomNGetResponse> DicomClientNGetRequestHandler(DicomNGetRequest request);
+
 }

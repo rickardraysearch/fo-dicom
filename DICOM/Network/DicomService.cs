@@ -913,9 +913,18 @@ namespace Dicom.Network
                 || dimse.Type == DicomCommandField.NEventReportRequest
                 || dimse.Type == DicomCommandField.NGetRequest || dimse.Type == DicomCommandField.NSetRequest)
             {
+                DicomResponse response = null;
+
+                if (this is IDicomClientConnection connection)
+                {
+                    response = await connection.OnNGetRequest(dimse as DicomNGetRequest).ConfigureAwait(false);
+                    await SendResponseAsync(response).ConfigureAwait(false);
+                    return;
+                }
+
+
                 var thisAsNServiceProvider = this as IDicomNServiceProvider ?? throw new DicomNetworkException("N-Service SCP not implemented");
 
-                DicomResponse response = null;
                 switch (dimse.Type)
                 {
                     case DicomCommandField.NActionRequest:
