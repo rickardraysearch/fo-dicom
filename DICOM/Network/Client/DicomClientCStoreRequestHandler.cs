@@ -19,4 +19,18 @@ namespace Dicom.Network.Client
     /// <returns></returns>
     public delegate Task<DicomNGetResponse> DicomClientNGetRequestHandler(DicomNGetRequest request);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public delegate Task<DicomNSetResponse> DicomClientNSetRequestHandler(DicomNSetRequest request);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public delegate Task<DicomNActionResponse> DicomClientNActionRequestHandler(DicomNActionRequest request);
+
 }

@@ -134,6 +134,8 @@ namespace Dicom.Network.Client
         public Encoding FallbackEncoding { get; set; }
         public DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
         public DicomClientNGetRequestHandler OnNGetRequest { get; set; }
+        public DicomClientNSetRequestHandler OnNSetRequest { get; set; }
+        public DicomClientNActionRequestHandler OnNActionRequest { get; set; }
 
         public event EventHandler<EventArguments.AssociationAcceptedEventArgs> AssociationAccepted;
         public event EventHandler<EventArguments.AssociationRejectedEventArgs> AssociationRejected;
@@ -250,6 +252,22 @@ namespace Dicom.Network.Client
                 return new DicomNGetResponse(request, DicomStatus.AttributeListError);
 
             return await OnNGetRequest(request).ConfigureAwait(false);
+        }
+
+        internal async Task<DicomResponse> OnNSetRequestAsync(DicomNSetRequest request)
+        {
+            if (OnNSetRequest == null)
+                return new DicomNSetResponse(request, DicomStatus.AttributeListError);
+
+            return await OnNSetRequest(request).ConfigureAwait(false);
+        }
+
+        internal async Task<DicomResponse> OnNActionRequestAsync(DicomNActionRequest request)
+        {
+            if (OnNActionRequest == null)
+                return new DicomNActionResponse(request, DicomStatus.AttributeListError);
+
+            return await OnNActionRequest(request).ConfigureAwait(false);
         }
 
 
