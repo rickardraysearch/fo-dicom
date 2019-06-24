@@ -17,6 +17,13 @@ namespace Dicom.Network.Client
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
+    public delegate Task<DicomNEventReportResponse> DicomClientNEventReportRequestHandler(DicomNEventReportRequest request);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public delegate Task<DicomNGetResponse> DicomClientNGetRequestHandler(DicomNGetRequest request);
 
     /// <summary>
@@ -32,5 +39,19 @@ namespace Dicom.Network.Client
     /// <param name="request"></param>
     /// <returns></returns>
     public delegate Task<DicomNActionResponse> DicomClientNActionRequestHandler(DicomNActionRequest request);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public delegate Task<DicomNCreateResponse> DicomClientNCreateRequestHandler(DicomNCreateRequest request);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public delegate Task<DicomNDeleteResponse> DicomClientNDeleteRequestHandler(DicomNDeleteRequest request);
 
 }

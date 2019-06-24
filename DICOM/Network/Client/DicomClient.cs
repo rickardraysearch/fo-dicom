@@ -133,9 +133,12 @@ namespace Dicom.Network.Client
         public List<DicomPresentationContext> AdditionalPresentationContexts { get; set; }
         public Encoding FallbackEncoding { get; set; }
         public DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
+        public DicomClientNEventReportRequestHandler OnNEventReportRequest { get; set; }
         public DicomClientNGetRequestHandler OnNGetRequest { get; set; }
         public DicomClientNSetRequestHandler OnNSetRequest { get; set; }
         public DicomClientNActionRequestHandler OnNActionRequest { get; set; }
+        public DicomClientNCreateRequestHandler OnNCreateRequest { get; set; }
+        public DicomClientNDeleteRequestHandler OnNDeleteRequest { get; set; }
 
         public event EventHandler<EventArguments.AssociationAcceptedEventArgs> AssociationAccepted;
         public event EventHandler<EventArguments.AssociationRejectedEventArgs> AssociationRejected;
@@ -246,6 +249,14 @@ namespace Dicom.Network.Client
             return await OnCStoreRequest(request).ConfigureAwait(false);
         }
 
+        internal async Task<DicomResponse> OnNEventReportRequestAsync(DicomNEventReportRequest request)
+        {
+            if (OnNGetRequest == null)
+                return new DicomNEventReportResponse(request, DicomStatus.AttributeListError);
+
+            return await OnNEventReportRequest(request).ConfigureAwait(false);
+        }
+
         internal async Task<DicomResponse> OnNGetRequestAsync(DicomNGetRequest request)
         {
             if (OnNGetRequest == null)
@@ -268,6 +279,22 @@ namespace Dicom.Network.Client
                 return new DicomNActionResponse(request, DicomStatus.AttributeListError);
 
             return await OnNActionRequest(request).ConfigureAwait(false);
+        }
+
+        internal async Task<DicomResponse> OnNCreateRequestAsync(DicomNCreateRequest request)
+        {
+            if (OnNActionRequest == null)
+                return new DicomNCreateResponse(request, DicomStatus.AttributeListError);
+
+            return await OnNCreateRequest(request).ConfigureAwait(false);
+        }
+
+        internal async Task<DicomResponse> OnNDeleteRequestAsync(DicomNDeleteRequest request)
+        {
+            if (OnNActionRequest == null)
+                return new DicomNDeleteResponse(request, DicomStatus.AttributeListError);
+
+            return await OnNDeleteRequest(request).ConfigureAwait(false);
         }
 
 

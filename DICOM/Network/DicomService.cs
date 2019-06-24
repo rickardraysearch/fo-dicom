@@ -917,7 +917,28 @@ namespace Dicom.Network
 
                 if (this is IDicomClientConnection connection)
                 {
-                    response = await connection.OnNGetRequest(dimse as DicomNGetRequest).ConfigureAwait(false);
+                    switch (dimse.Type)
+                    {
+                        case DicomCommandField.NActionRequest:
+                            response = await connection.OnNActionRequest(dimse as DicomNActionRequest).ConfigureAwait(false);
+                            break;
+                        case DicomCommandField.NCreateRequest:
+                            response = await connection.OnNCreateRequest(dimse as DicomNCreateRequest).ConfigureAwait(false);
+                            break;
+                        case DicomCommandField.NDeleteRequest:
+                            response = await connection.OnNDeleteRequest(dimse as DicomNDeleteRequest).ConfigureAwait(false);
+                            break;
+                        case DicomCommandField.NEventReportRequest:
+                            response = await connection.OnNEventReportRequest(dimse as DicomNEventReportRequest).ConfigureAwait(false);
+                            break;
+                        case DicomCommandField.NGetRequest:
+                            response = await connection.OnNGetRequest(dimse as DicomNGetRequest).ConfigureAwait(false);
+                            break;
+                        case DicomCommandField.NSetRequest:
+                            response = await connection.OnNSetRequest(dimse as DicomNSetRequest).ConfigureAwait(false);
+                            break;
+                    }
+
                     await SendResponseAsync(response).ConfigureAwait(false);
                     return;
                 }

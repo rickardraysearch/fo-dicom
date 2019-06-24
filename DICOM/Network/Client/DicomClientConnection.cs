@@ -119,7 +119,42 @@ namespace Dicom.Network.Client
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        Task<DicomResponse> OnNEventReportRequest(DicomNEventReportRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         Task<DicomResponse> OnNGetRequest(DicomNGetRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DicomResponse> OnNSetRequest(DicomNSetRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DicomResponse> OnNActionRequest(DicomNActionRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DicomResponse> OnNCreateRequest(DicomNCreateRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DicomResponse> OnNDeleteRequest(DicomNDeleteRequest request);
 
     }
 
@@ -210,9 +245,34 @@ namespace Dicom.Network.Client
             return DicomClient.OnCStoreRequestAsync(request);
         }
 
+        public Task<DicomResponse> OnNEventReportRequest(DicomNEventReportRequest request)
+        {
+            return DicomClient.OnNEventReportRequestAsync(request);
+        }
+
         public Task<DicomResponse> OnNGetRequest(DicomNGetRequest request)
         {
             return DicomClient.OnNGetRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnNSetRequest(DicomNSetRequest request)
+        {
+            return DicomClient.OnNSetRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnNActionRequest(DicomNActionRequest request)
+        {
+            return DicomClient.OnNActionRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnNCreateRequest(DicomNCreateRequest request)
+        {
+            return DicomClient.OnNCreateRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnNDeleteRequest(DicomNDeleteRequest request)
+        {
+            return DicomClient.OnNDeleteRequestAsync(request);
         }
     }
 }
