@@ -115,7 +115,7 @@ namespace Dicom.Network.Client
         Task<DicomResponse> OnCStoreRequestAsync(DicomCStoreRequest request);
 
         /// <summary>
-        /// Callback for handling a client related C-FIND request.
+        /// Callback for handling a client related C-FIND request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         /// <param name="request">
         /// C-FIND request.
@@ -126,7 +126,7 @@ namespace Dicom.Network.Client
         Task<DicomResponse> OnCFindRequestAsync(DicomCFindRequest request);
 
         /// <summary>
-        /// Callback for handling a client related C-ECHO request.
+        /// Callback for handling a client related C-ECHO request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         /// <param name="request">
         /// C-ECHO request.

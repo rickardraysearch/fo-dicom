@@ -54,42 +54,42 @@ namespace Dicom.Network.Client
         int AssociationLingerTimeoutInMs { get; }
 
         /// <summary>
-        /// Gets or sets the handler of a client C-STORE request.
+        /// Gets or sets the handler of a client C-STORE request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client C-ECHO request.
+        /// Gets or sets the handler of a client C-ECHO request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientCEchoRequestHandler OnCEchoRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client C-FIND request.
+        /// Gets or sets the handler of a client C-FIND request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientCFindRequestHandler OnCFindRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client N-GET request.
+        /// Gets or sets the handler of a client N-GET request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientNGetRequestHandler OnNGetRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client N-SET request.
+        /// Gets or sets the handler of a client N-SET request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientNSetRequestHandler OnNSetRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client N-ACTION request.
+        /// Gets or sets the handler of a client N-ACTION request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientNActionRequestHandler OnNActionRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client N-CREATE request.
+        /// Gets or sets the handler of a client N-CREATE request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientNCreateRequestHandler OnNCreateRequest { get; set; }
 
         /// <summary>
-        /// Gets or sets the handler of a client N-DELETE request.
+        /// Gets or sets the handler of a client N-DELETE request used in the special case when the DicomClient serves as SCP.
         /// </summary>
         DicomClientNDeleteRequestHandler OnNDeleteRequest { get; set; }
 
