@@ -115,6 +115,28 @@ namespace Dicom.Network.Client
         Task<DicomResponse> OnCStoreRequestAsync(DicomCStoreRequest request);
 
         /// <summary>
+        /// Callback for handling a client related C-FIND request.
+        /// </summary>
+        /// <param name="request">
+        /// C-FIND request.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DicomCFindResponse"/> related to the C-FIND <paramref name="request"/>.
+        /// </returns>
+        Task<DicomResponse> OnCFindRequestAsync(DicomCFindRequest request);
+
+        /// <summary>
+        /// Callback for handling a client related C-ECHO request.
+        /// </summary>
+        /// <param name="request">
+        /// C-ECHO request.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DicomCEchoResponse"/> related to the C-ECHO <paramref name="request"/>.
+        /// </returns>
+        Task<DicomResponse> OnCEchoRequestAsync(DicomCEchoRequest request);
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="request"></param>
@@ -122,35 +144,35 @@ namespace Dicom.Network.Client
         Task<DicomResponse> OnNEventReportRequest(DicomNEventReportRequest request);
 
         /// <summary>
-        /// 
+        /// Callback for handling a client related N-GET request.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         Task<DicomResponse> OnNGetRequest(DicomNGetRequest request);
 
         /// <summary>
-        /// 
+        /// Callback for handling a client related N-SET request.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         Task<DicomResponse> OnNSetRequest(DicomNSetRequest request);
 
         /// <summary>
-        /// 
+        /// Callback for handling a client related N-ACTION request.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         Task<DicomResponse> OnNActionRequest(DicomNActionRequest request);
 
         /// <summary>
-        /// 
+        /// Callback for handling a client related N-CREATE request.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         Task<DicomResponse> OnNCreateRequest(DicomNCreateRequest request);
 
         /// <summary>
-        /// 
+        /// Callback for handling a client related N-DELETE request.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -243,6 +265,16 @@ namespace Dicom.Network.Client
         public Task<DicomResponse> OnCStoreRequestAsync(DicomCStoreRequest request)
         {
             return DicomClient.OnCStoreRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnCFindRequestAsync(DicomCFindRequest request)
+        {
+            return DicomClient.OnCFindRequestAsync(request);
+        }
+
+        public Task<DicomResponse> OnCEchoRequestAsync(DicomCEchoRequest request)
+        {
+            return DicomClient.OnCEchoRequestAsync(request);
         }
 
         public Task<DicomResponse> OnNEventReportRequest(DicomNEventReportRequest request)

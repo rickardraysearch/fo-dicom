@@ -58,7 +58,40 @@ namespace Dicom.Network.Client
         /// </summary>
         DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handler of a client C-ECHO request.
+        /// </summary>
+        DicomClientCEchoRequestHandler OnCEchoRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler of a client C-FIND request.
+        /// </summary>
+        DicomClientCFindRequestHandler OnCFindRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler of a client N-GET request.
+        /// </summary>
         DicomClientNGetRequestHandler OnNGetRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler of a client N-SET request.
+        /// </summary>
+        DicomClientNSetRequestHandler OnNSetRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler of a client N-ACTION request.
+        /// </summary>
+        DicomClientNActionRequestHandler OnNActionRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler of a client N-CREATE request.
+        /// </summary>
+        DicomClientNCreateRequestHandler OnNCreateRequest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the handler of a client N-DELETE request.
+        /// </summary>
+        DicomClientNDeleteRequestHandler OnNDeleteRequest { get; set; }
 
         /// <summary>
         /// Representation of the DICOM association accepted event.
@@ -133,6 +166,8 @@ namespace Dicom.Network.Client
         public List<DicomPresentationContext> AdditionalPresentationContexts { get; set; }
         public Encoding FallbackEncoding { get; set; }
         public DicomClientCStoreRequestHandler OnCStoreRequest { get; set; }
+        public DicomClientCEchoRequestHandler OnCEchoRequest { get; set; }
+        public DicomClientCFindRequestHandler OnCFindRequest { get; set; }
         public DicomClientNEventReportRequestHandler OnNEventReportRequest { get; set; }
         public DicomClientNGetRequestHandler OnNGetRequest { get; set; }
         public DicomClientNSetRequestHandler OnNSetRequest { get; set; }
@@ -247,6 +282,22 @@ namespace Dicom.Network.Client
                 return new DicomCStoreResponse(request, DicomStatus.StorageStorageOutOfResources);
 
             return await OnCStoreRequest(request).ConfigureAwait(false);
+        }
+
+        internal async Task<DicomResponse> OnCEchoRequestAsync(DicomCEchoRequest request)
+        {
+            if (OnCEchoRequest == null)
+                return new DicomCEchoResponse(request, DicomStatus.StorageStorageOutOfResources);
+
+            return await OnCEchoRequest(request).ConfigureAwait(false);
+        }
+
+        internal async Task<DicomResponse> OnCFindRequestAsync(DicomCFindRequest request)
+        {
+            if (OnCFindRequest == null)
+                return new DicomCFindResponse(request, DicomStatus.StorageStorageOutOfResources);
+
+            return await OnCFindRequest(request).ConfigureAwait(false);
         }
 
         internal async Task<DicomResponse> OnNEventReportRequestAsync(DicomNEventReportRequest request)
