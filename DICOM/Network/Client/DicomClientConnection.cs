@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dicom.Network.Client
 {
-    public interface IDicomClientConnection : IDisposable
+    public interface IDicomClientConnection : IDisposable, IDicomNServiceAsyncProvider
     {
         /// <summary>
         /// Gets the network stream of this connection
@@ -135,49 +135,6 @@ namespace Dicom.Network.Client
         /// The <see cref="DicomCEchoResponse"/> related to the C-ECHO <paramref name="request"/>.
         /// </returns>
         Task<DicomResponse> OnCEchoRequestAsync(DicomCEchoRequest request);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<DicomResponse> OnNEventReportRequest(DicomNEventReportRequest request);
-
-        /// <summary>
-        /// Callback for handling a client related N-GET request.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<DicomResponse> OnNGetRequest(DicomNGetRequest request);
-
-        /// <summary>
-        /// Callback for handling a client related N-SET request.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<DicomResponse> OnNSetRequest(DicomNSetRequest request);
-
-        /// <summary>
-        /// Callback for handling a client related N-ACTION request.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<DicomResponse> OnNActionRequest(DicomNActionRequest request);
-
-        /// <summary>
-        /// Callback for handling a client related N-CREATE request.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<DicomResponse> OnNCreateRequest(DicomNCreateRequest request);
-
-        /// <summary>
-        /// Callback for handling a client related N-DELETE request.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<DicomResponse> OnNDeleteRequest(DicomNDeleteRequest request);
-
     }
 
     public class DicomClientConnection : DicomService, IDicomClientConnection
@@ -277,32 +234,32 @@ namespace Dicom.Network.Client
             return DicomClient.OnCEchoRequestAsync(request);
         }
 
-        public Task<DicomResponse> OnNEventReportRequest(DicomNEventReportRequest request)
+        public Task<DicomNEventReportResponse> OnNEventReportRequestAsync(DicomNEventReportRequest request)
         {
             return DicomClient.OnNEventReportRequestAsync(request);
         }
 
-        public Task<DicomResponse> OnNGetRequest(DicomNGetRequest request)
+        public Task<DicomNGetResponse> OnNGetRequestAsync(DicomNGetRequest request)
         {
             return DicomClient.OnNGetRequestAsync(request);
         }
 
-        public Task<DicomResponse> OnNSetRequest(DicomNSetRequest request)
+        public Task<DicomNSetResponse> OnNSetRequestAsync(DicomNSetRequest request)
         {
             return DicomClient.OnNSetRequestAsync(request);
         }
 
-        public Task<DicomResponse> OnNActionRequest(DicomNActionRequest request)
+        public Task<DicomNActionResponse> OnNActionRequestAsync(DicomNActionRequest request)
         {
             return DicomClient.OnNActionRequestAsync(request);
         }
 
-        public Task<DicomResponse> OnNCreateRequest(DicomNCreateRequest request)
+        public Task<DicomNCreateResponse> OnNCreateRequestAsync(DicomNCreateRequest request)
         {
             return DicomClient.OnNCreateRequestAsync(request);
         }
 
-        public Task<DicomResponse> OnNDeleteRequest(DicomNDeleteRequest request)
+        public Task<DicomNDeleteResponse> OnNDeleteRequestAsync(DicomNDeleteRequest request)
         {
             return DicomClient.OnNDeleteRequestAsync(request);
         }

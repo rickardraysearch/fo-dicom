@@ -265,6 +265,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomCGetProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomCMoveProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomCStoreProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomNServiceAsyncProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomNServiceProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\IDicomService.cs" />

@@ -300,7 +300,7 @@ namespace Dicom.Network.Client
             return await OnCFindRequest(request).ConfigureAwait(false);
         }
 
-        internal async Task<DicomResponse> OnNEventReportRequestAsync(DicomNEventReportRequest request)
+        internal async Task<DicomNEventReportResponse> OnNEventReportRequestAsync(DicomNEventReportRequest request)
         {
             if (OnNGetRequest == null)
                 return new DicomNEventReportResponse(request, DicomStatus.AttributeListError);
@@ -308,7 +308,7 @@ namespace Dicom.Network.Client
             return await OnNEventReportRequest(request).ConfigureAwait(false);
         }
 
-        internal async Task<DicomResponse> OnNGetRequestAsync(DicomNGetRequest request)
+        internal async Task<DicomNGetResponse> OnNGetRequestAsync(DicomNGetRequest request)
         {
             if (OnNGetRequest == null)
                 return new DicomNGetResponse(request, DicomStatus.AttributeListError);
@@ -316,7 +316,7 @@ namespace Dicom.Network.Client
             return await OnNGetRequest(request).ConfigureAwait(false);
         }
 
-        internal async Task<DicomResponse> OnNSetRequestAsync(DicomNSetRequest request)
+        internal async Task<DicomNSetResponse> OnNSetRequestAsync(DicomNSetRequest request)
         {
             if (OnNSetRequest == null)
                 return new DicomNSetResponse(request, DicomStatus.AttributeListError);
@@ -324,7 +324,7 @@ namespace Dicom.Network.Client
             return await OnNSetRequest(request).ConfigureAwait(false);
         }
 
-        internal async Task<DicomResponse> OnNActionRequestAsync(DicomNActionRequest request)
+        internal async Task<DicomNActionResponse> OnNActionRequestAsync(DicomNActionRequest request)
         {
             if (OnNActionRequest == null)
                 return new DicomNActionResponse(request, DicomStatus.AttributeListError);
@@ -332,7 +332,7 @@ namespace Dicom.Network.Client
             return await OnNActionRequest(request).ConfigureAwait(false);
         }
 
-        internal async Task<DicomResponse> OnNCreateRequestAsync(DicomNCreateRequest request)
+        internal async Task<DicomNCreateResponse> OnNCreateRequestAsync(DicomNCreateRequest request)
         {
             if (OnNActionRequest == null)
                 return new DicomNCreateResponse(request, DicomStatus.AttributeListError);
@@ -340,7 +340,7 @@ namespace Dicom.Network.Client
             return await OnNCreateRequest(request).ConfigureAwait(false);
         }
 
-        internal async Task<DicomResponse> OnNDeleteRequestAsync(DicomNDeleteRequest request)
+        internal async Task<DicomNDeleteResponse> OnNDeleteRequestAsync(DicomNDeleteRequest request)
         {
             if (OnNActionRequest == null)
                 return new DicomNDeleteResponse(request, DicomStatus.AttributeListError);
